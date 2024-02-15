@@ -16,13 +16,16 @@ student_2_major = "Chemistry"
 student_2_expected_graduation_year = "2025"
 
 # TODO: Create a new student student_3 following the same format
-
-
+student_3_id = 123456789
+student_3_first_name = "Arya"
+student_3_last_name = "Killion"
+student_3_major = "Forestry"
+student_3_expected_graduation_year = "2029"
 
 
 
 # Discussion: What are some problems with this approach?
-
+#hard to scale
 
 
 
@@ -35,12 +38,37 @@ student_2_expected_graduation_year = "2025"
 # Basic structure of a class
 class Student:
     # TODO: Let's build this class!
-    def __init__(self):
-        pass
+    def __init__(self, id, first_name, last_name, major, graduation_year):
+        self.__id = id
+        self.first_name = first_name
+        self.last_name = last_name
+        self.major = major
+        self.graduation_year = graduation_year
+
+
+    @property
+    def id(self):
+           return self.__id
+    
+    def get_full_name(self):     
+         return self.first_name + " " + self.last_name    
+    
+
+    def get_last_four(self):
+         return int(str(self.__id)[-4:])
+    
+    def print_degree_title(self):
+         print("Bachelor of " + self.major)
 
 
 
 # TODO: Let's recreate our 3 students as objects of our new class!
+
+student_1 = Student(18584831, "Daniel", "White", "Computer Science", "2026" )
+student_2 = Student(18582185, "Jennie","Kim", "Chemistry", "2025")
+student_3 = Student(123456789, "Arya", "Killion", "Forestry", "2029")
+
+
 
 
 
@@ -54,7 +82,7 @@ class Student:
 # TODO: Make the id private.
 # Test your code and ensure you cannot access student_1.__id (you should see an error)
     
-
+#print(student_1.__id)
 
 
 # This is good because it prevents users from modifying the id by accident.
@@ -62,8 +90,12 @@ class Student:
     
 # TODO: Add an @property getter for id
 # Test to make sure you can get the id with student_1.id
-    
 
+print(student_1.id)
+
+print(student_1.get_full_name())
+
+print(student_1.get_last_four)
 
 # What if we want a way to just get the last four of the id instead of the whole thing? We can build a custom class method to do this.
     
@@ -79,10 +111,22 @@ class Student:
     
 # TODO: Create a child class called GradStudent which inherits from the Student class, with the additional property of "specialization"
 
+class GradStudent(Student):
+     def __init__(self, id, first_name, last_name, major, graduation_year, specialization):
+          self.specialization = specialization
+          super().__init__(id, first_name, last_name, major, graduation_year)
+
+     def print_degree_title(self):
+        print("Master of " + self.major + " with a specialization in " + self.specialization)
+
 
 # create a new student_4 which uses GradStudent instead.
 # this person's major is Computer Science and their Specialization is Artifical Intelligence
     
+student_4 = GradStudent(987654321, "Michael", "Maizel", "Computer Science", "2028", "Artificial Intelligence")
+
+print('hello')
+
 
 # OOP Property - Polymorphism
 # refers to methods/functions/operators with the same name that can be executed on many objects or classes.
